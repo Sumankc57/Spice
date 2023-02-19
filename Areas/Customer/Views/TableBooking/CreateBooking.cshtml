@@ -1,0 +1,105 @@
+﻿@model Spice.Models.TableModel.TableBooking
+
+<h4>TableBooking</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateBooking">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserId" class="control-label" hidden></label>
+              @*  <input asp-for="UserId" class="form-control" />
+                <span asp-validation-for="UserId" class="text-danger"></span>*@
+            </div>
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" value="@User.Identity.Name" disabled />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserEmail" class="control-label"></label>
+                <input asp-for="UserEmail" class="form-control" />
+                <span asp-validation-for="UserEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BookingDate" class="control-label"></label>
+                <input asp-for="BookingDate" class="form-control" />
+                <span asp-validation-for="BookingDate" class="text-danger" ></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExitingDate" class="control-label"></label>
+                <input asp-for="ExitingDate" class="form-control" />
+                <span asp-validation-for="ExitingDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BookingFor" class="control-label"></label>
+                <input asp-for="BookingFor" class="form-control" />
+                <span asp-validation-for="BookingFor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TypeID" class="control-label"></label>
+                @Html.DropDownListFor(model => model.TypeID, ViewBag.DroD as SelectList,
+                "Select Table Type ", new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+function isValidDate(date) {
+  return !isNaN(date.getTime());
+}
+
+$(document).ready(function() {
+    var currentDate = new Date();
+    var minDate = new Date();
+    var maxDate = new Date();
+    
+    maxDate.setHours(maxDate.getHours() + 6);
+    
+    var formattedDate = formatDate(currentDate);
+    var minDateString = formatDate(minDate);
+    var maxDateString = formatDate(maxDate);
+    $("#BookingDate").val(formattedDate);
+    $("#BookingDate").prop('readonly', true);
+    // Set the minimum and maximum values for the datetime-local input field
+    $("#ExitingDate").attr("min", minDateString);
+    $("#ExitingDate").attr("max", maxDateString);
+  
+    // Validate the input value when it changes
+    $("#ExitingDate").on("change", function() {
+        var inputVal = $(this).val();
+        var inputDate = new Date(inputVal);
+        if (inputDate < minDate || inputDate > maxDate) {
+            // Show an error message
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Date/time must be within the next 6 hours.',
+            });
+            // Reset the input value
+            $(this).val("");
+        }
+    });
+});
+
+function formatDate(date) {
+    // Format date as YYYY-MM-DDTHH:mm
+    var formattedDate = date.getFullYear() + "-" +
+                        ("0" + (date.getMonth() + 1)).slice(-2) + "-" +
+                        ("0" + date.getDate()).slice(-2) + "T" +
+                        ("0" + date.getHours()).slice(-2) + ":" +
+                        ("0" + date.getMinutes()).slice(-2);
+    return formattedDate;
+}
+
+</script>
+

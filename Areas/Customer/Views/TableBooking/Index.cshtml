@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Spice.Models.TableModel.TableBooking>
+@using Spice.Data
+@inject ApplicationDbContext db;
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+          
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookingDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExitingDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookingFor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tableType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookingDate)
+            </td>
+                  <td>
+                    @Html.DisplayFor(modelItem => item.ExitingDate)
+                </td>
+                
+            <td>
+                @Html.DisplayFor(modelItem => item.BookingFor)
+            </td>
+            <td>
+                @{
+                    
+                }
+                @Html.DisplayFor(modelItem =>db.TableTypes.Find(item.TypeID).Name)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+            <td>
+
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

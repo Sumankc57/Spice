@@ -1,0 +1,60 @@
+﻿@model Spice.Models.TableModel.TableBooking
+
+<h4>TableBooking</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+               
+                <input asp-for="UserId" class="form-control" hidden />
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+               
+                <input asp-for="UserName" class="form-control" hidden/>
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserEmail" class="control-label"></label>
+                <input asp-for="UserEmail" class="form-control" />
+                <span asp-validation-for="UserEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BookingDate" class="control-label"></label>
+                <input asp-for="BookingDate" class="form-control" />
+                <span asp-validation-for="BookingDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExitingDate" class="control-label"></label>
+                <input asp-for="ExitingDate" class="form-control" />
+                <span asp-validation-for="ExitingDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <input asp-for="Status" class="form-control" disabled />
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BookingFor" class="control-label"></label>
+                <input asp-for="BookingFor" class="form-control" />
+                <span asp-validation-for="BookingFor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+               
+                <select asp-for="TypeID" class="form-control" asp-items="ViewBag.TypeID" hidden></select>
+                <span asp-validation-for="TypeID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

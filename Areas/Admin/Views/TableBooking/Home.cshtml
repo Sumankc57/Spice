@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<h1>Wecome</h1>
+<h2>
+    To Table Booking Control Home 
+</h2>
+
+<div style="margin-top:100px;">
+<td >
+    <div class="btn-group" role="group" style="margin-inline:80px;">
+        <a asp-action="Pendings" asp-controller="TableBooking" asp-area="Admin" class="btn btn-primary text-white" style="width:200px;">Pendings</a>
+  
+    </div>
+ 
+    <div class="btn-group" role="group" style="margin-inline:30px;">
+        
+        <a asp-action="CheckedList" asp-controller="TableBooking" asp-area="Admin" class="btn btn-primary text-white" style="width:300px;">Accepted  Booking Tables</a>
+    </div>
+
+    <div class="btn-group" role="group" style="margin-inline:30px;">
+
+        <a asp-action="DoneList" asp-controller="TableBooking" asp-area="Admin"  class="btn btn-primary text-white" style="width:200px;">Completed Bookings</a>
+    </div>
+</td>
+</div>
